@@ -8,6 +8,7 @@ namespace WebEng.ReplacementParts.Data
 {
     public class Brand
     {
+        public string PictureUrl { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

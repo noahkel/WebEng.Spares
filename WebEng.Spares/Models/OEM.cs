@@ -11,11 +11,9 @@ namespace WebEng.ReplacementParts.Models
     {
         [Key]
         public string OEMNumber { get; set; }
-        public virtual List<Car> suitableCars { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public long Weight { get; set; }
-
-        public virtual List<Car> Cars { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

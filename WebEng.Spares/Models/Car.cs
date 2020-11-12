@@ -9,6 +9,7 @@ namespace WebEng.ReplacementParts.Data
 {
     public class Car
     {
+        public string PictureUrl { get; set; }
         public long Key { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
