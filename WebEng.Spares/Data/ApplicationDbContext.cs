@@ -19,7 +19,8 @@ namespace WebEng.ReplacementParts.Data
         {
             modelBuilder.Entity<Brand>(eb =>
             {
-                eb.HasKey(e => e.Name);
+                eb.HasKey(e => e.Key);
+                eb.Property(e => e.Name);
                 eb.Property(e => e.Description).HasColumnName("CarDescription");
                 eb.Property(e => e.PictureUrl);
             });

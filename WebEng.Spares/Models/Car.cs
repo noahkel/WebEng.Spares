@@ -16,7 +16,7 @@ namespace WebEng.ReplacementParts.Data
         public DateTime Started { get; set; }
         public DateTime Finished { get; set; }
         public long Weight { get; set; }
-        public string BrandFK { get; set; }
+        public long BrandFK { get; set; }
         public virtual Brand Brand { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Brands/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(long id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace WebEng.ReplacementParts.Controllers
             }
 
             var brand = await _context.Brand
-                .FirstOrDefaultAsync(m => m.Name == id);
+                .FirstOrDefaultAsync(m => m.Key == id);
             if (brand == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description")] Brand brand)
+        public async Task<IActionResult> Create(Brand brand)
         {
             if (ModelState.IsValid)
             {
@@ -65,12 +65,8 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Brands/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             var brand = await _context.Brand.FindAsync(id);
             if (brand == null)
@@ -85,9 +81,9 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Description")] Brand brand)
+        public async Task<IActionResult> Edit(long id, [Bind("Key,Name,Description")] Brand brand)
         {
-            if (id != brand.Name)
+            if (id != brand.Key)
             {
                 return NotFound();
             }
@@ -101,7 +97,7 @@ namespace WebEng.ReplacementParts.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrandExists(brand.Name))
+                    if (!BrandExists(brand.Key))
                     {
                         return NotFound();
                     }
@@ -116,15 +112,10 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Brands/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var brand = await _context.Brand
-                .FirstOrDefaultAsync(m => m.Name == id);
+                .FirstOrDefaultAsync(m => m.Key == id);
             if (brand == null)
             {
                 return NotFound();
@@ -136,7 +127,7 @@ namespace WebEng.ReplacementParts.Controllers
         // POST: Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var brand = await _context.Brand.FindAsync(id);
             _context.Brand.Remove(brand);
@@ -144,9 +135,9 @@ namespace WebEng.ReplacementParts.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BrandExists(string id)
+        private bool BrandExists(long id)
         {
-            return _context.Brand.Any(e => e.Name == id);
+            return _context.Brand.Any(e => e.Key == id);
         }
     }
 }
