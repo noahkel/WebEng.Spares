@@ -1,54 +1,69 @@
 ﻿@model WebEng.ReplacementParts.Data.Car
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details | " + Model.Name;
 }
 
-<h1>Details</h1>
+<div class="product-essential container">
+    <div class="row">
+            <!--End For version 1, 2, 6 -->
+            <!-- For version 3 -->
+            <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                <div class="product-image">
+                    @if (Model.PictureUrl == null || Model.PictureUrl == "")
+                    {
+                        <div class="product-full"> <img id="product-zoom1" src="~/images/missing.jpg" data-zoom-image="~/images/missing.jpg" alt="product-image"> </div>
+                    }
+                    else
+                    {
+                        <div class="product-full"> <img id="product-zoom1" src="@Model.PictureUrl" data-zoom-image="@Model.PictureUrl" alt="product-image"> </div>
+                    }
+                </div>
+            </div>
+            <!--End For version 1,2,6-->
+            <!-- For version 3 -->
+            <div class="product-shop col-lg- col-sm-7 col-xs-12">
+                <div class="brand">@Model.Brand.Name</div>
+                <div class="product-name">
+                    <h1>@Model.Name</h1>
+                </div>
+                <div class="spec-row" id="summarySpecs">
+                    <h2>Specifications</h2>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Name) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Name) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Description) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Description) </td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Started) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Started) </td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Finished) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Finished) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Weight) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Weight) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Brand) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Brand.Name) </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Key">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Key">Delete</a> |
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+    </div>
+</div>
 
-<div>
-    <h4>Car</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Started)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Started)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Finished)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Finished)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Key">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

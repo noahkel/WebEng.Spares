@@ -13,11 +13,11 @@
                         <div class="item-img-info">
                             @if (item.PictureUrl == null || item.PictureUrl == "")
                             {
-                                <a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="~/images/missing.jpg" alt="Retis lapen casen"></a>
+                                <a asp-action="Details" asp-route-id="@item.Key" class="product-image"><img src="~/images/missing.jpg" alt="Retis lapen casen"></a>
                             }
                             else
                             {
-                                <a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="@item.PictureUrl" alt="Retis lapen casen"></a>
+                                <a asp-action="Details" asp-route-id="@item.Key" class="product-image"><img src="@item.PictureUrl" alt="Retis lapen casen"></a>
                             }
                             <div class="item-box-hover">
                                 <div class="box-inner">
@@ -31,7 +31,7 @@
                             <div class="item-price">
                                 <div class="price-box"><span class="regular-price"><span class="price">@item.Name</span> </span> </div>
                             </div>
-                            <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">@item.Description</a> </div>
+                            <div class="item-title"><a asp-action="Details" asp-route-id="@item.Key" title="Retis lapen casen">@item.Description</a> </div>
                             <div class="item-content">
                                 <div class="other-info">
                                     <div class="col-km"><a asp-action="Edit" asp-route-id="@item.Key">Edit</a></div>
