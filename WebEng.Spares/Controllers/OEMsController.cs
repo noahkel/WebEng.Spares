@@ -54,7 +54,7 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OEMNumber,Name,Description,Weight")] OEM oEM)
+        public async Task<IActionResult> Create(OEM oEM)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("OEMNumber,Name,Description,Weight")] OEM oEM)
+        public async Task<IActionResult> Edit(string id, OEM oEM)
         {
             if (id != oEM.OEMNumber)
             {
