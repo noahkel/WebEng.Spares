@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebEng.ReplacementParts.Data;
 using WebEng.ReplacementParts.Models;
 
-namespace WebEng.ReplacementParts.Controllers
+namespace WebEng.Spares.Controllers
 {
     public class ManufacturersController : Controller
     {
@@ -26,7 +26,7 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Manufacturers/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
             {
@@ -34,7 +34,7 @@ namespace WebEng.ReplacementParts.Controllers
             }
 
             var manufacturer = await _context.Manufacturer
-                .FirstOrDefaultAsync(m => m.Name == id);
+                .FirstOrDefaultAsync(m => m.Key == id);
             if (manufacturer == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description")] Manufacturer manufacturer)
+        public async Task<IActionResult> Create([Bind("Key,PictureUrl,Name,Description")] Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Manufacturers/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
             {
@@ -86,9 +86,9 @@ namespace WebEng.ReplacementParts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Description")] Manufacturer manufacturer)
+        public async Task<IActionResult> Edit(long id, [Bind("Key,PictureUrl,Name,Description")] Manufacturer manufacturer)
         {
-            if (id != manufacturer.Name)
+            if (id != manufacturer.Key)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace WebEng.ReplacementParts.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ManufacturerExists(manufacturer.Name))
+                    if (!ManufacturerExists(manufacturer.Key))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace WebEng.ReplacementParts.Controllers
         }
 
         // GET: Manufacturers/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
@@ -125,7 +125,7 @@ namespace WebEng.ReplacementParts.Controllers
             }
 
             var manufacturer = await _context.Manufacturer
-                .FirstOrDefaultAsync(m => m.Name == id);
+                .FirstOrDefaultAsync(m => m.Key == id);
             if (manufacturer == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace WebEng.ReplacementParts.Controllers
         // POST: Manufacturers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var manufacturer = await _context.Manufacturer.FindAsync(id);
             _context.Manufacturer.Remove(manufacturer);
@@ -145,9 +145,9 @@ namespace WebEng.ReplacementParts.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ManufacturerExists(string id)
+        private bool ManufacturerExists(long id)
         {
-            return _context.Manufacturer.Any(e => e.Name == id);
+            return _context.Manufacturer.Any(e => e.Key == id);
         }
     }
 }

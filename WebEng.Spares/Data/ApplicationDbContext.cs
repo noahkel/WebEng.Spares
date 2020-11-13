@@ -27,7 +27,8 @@ namespace WebEng.ReplacementParts.Data
 
             modelBuilder.Entity<Manufacturer>(eb =>
             {
-                eb.HasKey(e => e.Name);
+                eb.HasKey(e => e.Key);
+                eb.Property(e => e.Name);
                 eb.Property(e => e.Description);
                 eb.Property(e => e.PictureUrl);
             });

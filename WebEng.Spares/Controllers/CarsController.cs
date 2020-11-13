@@ -47,7 +47,7 @@ namespace WebEng.ReplacementParts.Controllers
         // GET: Cars/Create
         public IActionResult Create()
         {
-            ViewData["BrandFK"] = new SelectList(_context.Brand, "Name", "Name");
+            ViewData["BrandFK"] = new SelectList(_context.Brand, "Key", "Name");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace WebEng.ReplacementParts.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandFK"] = new SelectList(_context.Brand, "Name", "Name", car.BrandFK);
+            ViewData["BrandFK"] = new SelectList(_context.Brand, "Key", "Name", car.BrandFK);
             return View(car);
         }
 
@@ -81,7 +81,7 @@ namespace WebEng.ReplacementParts.Controllers
             {
                 return NotFound();
             }
-            ViewData["BrandFK"] = new SelectList(_context.Brand, "Name", "Name", car.BrandFK);
+            ViewData["BrandFK"] = new SelectList(_context.Brand, "Key", "Name", car.BrandFK);
             return View(car);
         }
 

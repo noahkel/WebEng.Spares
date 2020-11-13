@@ -14,7 +14,7 @@ namespace WebEng.ReplacementParts.Models
 
         //Manufacturer
         public virtual Manufacturer Manufacturer { get; set; }
-        public string ManufacturerKey { get; set; }
+        public long ManufacturerKey { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public long Price { get; set; }
