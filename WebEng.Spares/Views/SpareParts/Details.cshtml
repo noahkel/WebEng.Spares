@@ -1,0 +1,73 @@
+﻿@model WebEng.ReplacementParts.Models.SparePart
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="product-essential container">
+    <div class="row">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!--End For version 1, 2, 6 -->
+            <!-- For version 3 -->
+            <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                <div class="product-image">
+                    @if (Model.PictureUrl == null || Model.PictureUrl == "")
+                    {
+                        <div class="product-full"> <img id="product-zoom1" src="~/images/missing.jpg" data-zoom-image="~/images/missing.jpg" alt="product-image"> </div>
+                    }
+                    else
+                    {
+                        <div class="product-full"> <img id="product-zoom1" src="@Model.PictureUrl" data-zoom-image="@Model.PictureUrl" alt="product-image"> </div>
+                    }
+                </div>
+            </div>
+            <!--End For version 1,2,6-->
+            <!-- For version 3 -->
+            <div class="product-shop col-lg- col-sm-7 col-xs-12">
+                <div class="product-name">
+                    <span class="label-spec"> @Html.DisplayFor(model => model.Manufacturer.Name) </span>
+                    <h1 class="value-spec"> @Html.DisplayFor(model => model.Name) </h1>
+                </div>
+                <div class="spec-row" id="summarySpecs">
+                    <h2>Specifications</h2>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.OEMKey) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.OEMKey) @Html.DisplayFor(model => model.OEM.Name)</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Manufacturer) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Manufacturer.Name) </td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Description) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Description) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Price) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Price) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Weight) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Weight) </td>
+                            </tr>
+                            <tr>
+                                <td class="label-spec"> @Html.DisplayNameFor(model => model.Available) <span class="coln">:</span></td>
+                                <td class="value-spec"> @Html.DisplayFor(model => model.Available) </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

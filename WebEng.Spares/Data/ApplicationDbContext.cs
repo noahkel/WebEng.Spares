@@ -45,7 +45,7 @@ namespace WebEng.ReplacementParts.Data
                 eb.HasOne(eb => eb.Brand).WithMany().HasForeignKey(d => d.BrandFK);
             });
 
-            modelBuilder.Entity<ReplacementPart>(eb =>
+            modelBuilder.Entity<SparePart>(eb =>
             {
                 eb.HasKey(e => e.Key);
                 eb.Property(e => e.Name);
@@ -74,7 +74,7 @@ namespace WebEng.ReplacementParts.Data
         public DbSet<WebEng.ReplacementParts.Data.Car> Car { get; set; }
         public DbSet<WebEng.ReplacementParts.Models.OEM> OEM { get; set; }
         public DbSet<WebEng.ReplacementParts.Models.Manufacturer> Manufacturer { get; set; }
-        public DbSet<WebEng.ReplacementParts.Models.ReplacementPart> ReplacementPart { get; set; }
+        public DbSet<WebEng.ReplacementParts.Models.SparePart> ReplacementPart { get; set; }
         public DbSet<WebEng.ReplacementParts.Models.OEMCar> OEMCar { get; set; }
     }
 }

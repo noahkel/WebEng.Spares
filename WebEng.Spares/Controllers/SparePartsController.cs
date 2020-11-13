@@ -8,25 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using WebEng.ReplacementParts.Data;
 using WebEng.ReplacementParts.Models;
 
-namespace WebEng.ReplacementParts.Controllers
+namespace WebEng.Spares.Controllers
 {
-    public class ReplacementPartsController : Controller
+    public class SparePartsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ReplacementPartsController(ApplicationDbContext context)
+        public SparePartsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ReplacementParts
+        // GET: SpareParts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ReplacementPart.Include(r => r.Manufacturer).Include(r => r.OEM);
+            var applicationDbContext = _context.ReplacementPart.Include(s => s.Manufacturer).Include(s => s.OEM);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: ReplacementParts/Details/5
+        // GET: SpareParts/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -34,45 +34,45 @@ namespace WebEng.ReplacementParts.Controllers
                 return NotFound();
             }
 
-            var replacementPart = await _context.ReplacementPart
-                .Include(r => r.Manufacturer)
-                .Include(r => r.OEM)
+            var sparePart = await _context.ReplacementPart
+                .Include(s => s.Manufacturer)
+                .Include(s => s.OEM)
                 .FirstOrDefaultAsync(m => m.Key == id);
-            if (replacementPart == null)
+            if (sparePart == null)
             {
                 return NotFound();
             }
 
-            return View(replacementPart);
+            return View(sparePart);
         }
 
-        // GET: ReplacementParts/Create
+        // GET: SpareParts/Create
         public IActionResult Create()
         {
-            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Name", "Name");
-            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber");
+            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Key", "Name");
+            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "Name");
             return View();
         }
 
-        // POST: ReplacementParts/Create
+        // POST: SpareParts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Key,OEMKey,ManufacturerKey,Name,Description,Price,Weight,Available")] ReplacementPart replacementPart)
+        public async Task<IActionResult> Create([Bind("Key,OEMKey,ManufacturerKey,Name,Description,Price,Weight,Available,PictureUrl")] SparePart sparePart)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(replacementPart);
+                _context.Add(sparePart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Name", "Name", replacementPart.ManufacturerKey);
-            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", replacementPart.OEMKey);
-            return View(replacementPart);
+            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Key", "Key", sparePart.ManufacturerKey);
+            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", sparePart.OEMKey);
+            return View(sparePart);
         }
 
-        // GET: ReplacementParts/Edit/5
+        // GET: SpareParts/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -80,24 +80,24 @@ namespace WebEng.ReplacementParts.Controllers
                 return NotFound();
             }
 
-            var replacementPart = await _context.ReplacementPart.FindAsync(id);
-            if (replacementPart == null)
+            var sparePart = await _context.ReplacementPart.FindAsync(id);
+            if (sparePart == null)
             {
                 return NotFound();
             }
-            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Name", "Name", replacementPart.ManufacturerKey);
-            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", replacementPart.OEMKey);
-            return View(replacementPart);
+            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Key", "Key", sparePart.ManufacturerKey);
+            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", sparePart.OEMKey);
+            return View(sparePart);
         }
 
-        // POST: ReplacementParts/Edit/5
+        // POST: SpareParts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Key,OEMKey,ManufacturerKey,Name,Description,Price,Weight,Available")] ReplacementPart replacementPart)
+        public async Task<IActionResult> Edit(long id, [Bind("Key,OEMKey,ManufacturerKey,Name,Description,Price,Weight,Available,PictureUrl")] SparePart sparePart)
         {
-            if (id != replacementPart.Key)
+            if (id != sparePart.Key)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace WebEng.ReplacementParts.Controllers
             {
                 try
                 {
-                    _context.Update(replacementPart);
+                    _context.Update(sparePart);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReplacementPartExists(replacementPart.Key))
+                    if (!SparePartExists(sparePart.Key))
                     {
                         return NotFound();
                     }
@@ -122,12 +122,12 @@ namespace WebEng.ReplacementParts.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Name", "Name", replacementPart.ManufacturerKey);
-            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", replacementPart.OEMKey);
-            return View(replacementPart);
+            ViewData["ManufacturerKey"] = new SelectList(_context.Manufacturer, "Key", "Key", sparePart.ManufacturerKey);
+            ViewData["OEMKey"] = new SelectList(_context.OEM, "OEMNumber", "OEMNumber", sparePart.OEMKey);
+            return View(sparePart);
         }
 
-        // GET: ReplacementParts/Delete/5
+        // GET: SpareParts/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -135,30 +135,30 @@ namespace WebEng.ReplacementParts.Controllers
                 return NotFound();
             }
 
-            var replacementPart = await _context.ReplacementPart
-                .Include(r => r.Manufacturer)
-                .Include(r => r.OEM)
+            var sparePart = await _context.ReplacementPart
+                .Include(s => s.Manufacturer)
+                .Include(s => s.OEM)
                 .FirstOrDefaultAsync(m => m.Key == id);
-            if (replacementPart == null)
+            if (sparePart == null)
             {
                 return NotFound();
             }
 
-            return View(replacementPart);
+            return View(sparePart);
         }
 
-        // POST: ReplacementParts/Delete/5
+        // POST: SpareParts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var replacementPart = await _context.ReplacementPart.FindAsync(id);
-            _context.ReplacementPart.Remove(replacementPart);
+            var sparePart = await _context.ReplacementPart.FindAsync(id);
+            _context.ReplacementPart.Remove(sparePart);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReplacementPartExists(long id)
+        private bool SparePartExists(long id)
         {
             return _context.ReplacementPart.Any(e => e.Key == id);
         }

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebEng.ReplacementParts.Models.SparePart>
+
+@{
+    ViewData["Title"] = "Cars | Overview";
+}
+<div class="category-products">
+    <ul class="products-grid">
+        @foreach (var item in Model)
+        {
+            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                <div class="item-inner">
+                    <div class="item-img">
+                        <div class="item-img-info">
+                            @if (item.PictureUrl == null || item.PictureUrl == "")
+                            {
+                                <a asp-action="Details" asp-route-id="@item.Key" class="product-image"><img src="~/images/missing.jpg" alt="Retis lapen casen"></a>
+                            }
+                            else
+                            {
+                                <a asp-action="Details" asp-route-id="@item.Key" class="product-image"><img src="@item.PictureUrl" alt="Retis lapen casen"></a>
+                            }
+                            <div class="item-box-hover">
+                                <div class="box-inner">
+                                    <div class="product-detail-bnt"><a asp-action="Details" asp-route-id="@item.Key" class="button detail-bnt"><span>Quick View</span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="info-inner">
+                            <div class="item-price">
+                                <div class="price-box"><span class="regular-price"><span class="price">@item.Name</span> </span> </div>
+                            </div>
+                            <div class="item-title"><a asp-action="Details" asp-route-id="@item.Key" title="Retis lapen casen">@item.Description</a> </div>
+                            <div class="item-content">
+                                <div class="other-info">
+                                    <div class="col-km"><a asp-action="Edit" asp-route-id="@item.Key">Edit</a></div>
+                                    <div class="col-engine"><a asp-action="Details" asp-route-id="@item.Key">Details</a></div>
+                                    <div class="col-date"><a asp-action="Delete" asp-route-id="@item.Key">Delete</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        }
+    </ul>
+</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>

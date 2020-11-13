@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebEng.ReplacementParts.Models
 {
-    public class ReplacementPart
+    public class SparePart
     {
         public long Key { get; set; }
         // OEM
