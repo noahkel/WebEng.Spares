@@ -5,7 +5,7 @@ namespace WebEng.ReplacementParts
 {
     public static class DbInitializer
     {
-        public static async Task Initialize(ApplicationDbContext context)
+        public static async Task Initialize()
         {
             InitAppData initializer = new InitAppData();
             await initializer.Init();

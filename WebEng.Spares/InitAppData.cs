@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using WebEng.ReplacementParts.Data;
 
@@ -59,5 +60,4 @@ namespace WebEng.ReplacementParts
             }
         }
     }
-}
 }

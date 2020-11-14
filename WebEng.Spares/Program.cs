@@ -25,7 +25,7 @@ namespace WebEng.ReplacementParts
                 try
                 {
 
-                    DbInitializer.Initialize(context).Wait();
+                    DbInitializer.Initialize().Wait();
 
 
                 }
@@ -48,13 +48,5 @@ namespace WebEng.ReplacementParts
                 })
                 .UseStartup<Startup>()
                 .Build();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }
