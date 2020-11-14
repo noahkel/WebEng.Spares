@@ -1,4 +1,3 @@
-OEMKey;ManufacturerKey;Name;Description;Price;Weight;Available
-030905377C;Bosch;Klopfsensor;Klopfsensor für VW Golf V;20,37;0,259;Yes
-1JO959126;Denso;Druckschalter Klimaanlage;Druckschalter für die Klimaanlage eines Audi A3;27,21;0,033;No
-12120038349;Bosch;Zündkerze;Zündkerze für BMW M3 E90 aus Nickel;9,7;0,135;Yes
+030905377C;Bosch;Klopfsensor;Klopfsensor für VW Golf V;20,37;0,259;200
+1JO959126;Denso;Druckschalter Klimaanlage;Druckschalter für die Klimaanlage eines Audi A3;27,21;0,033;0
+12120038349;Bosch;Zündkerze;Zündkerze für BMW M3 E90 aus Nickel;9,7;0,135;130

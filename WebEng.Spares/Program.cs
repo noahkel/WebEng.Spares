@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebEng.ReplacementParts.Data;
 
 namespace WebEng.ReplacementParts
 {
@@ -24,10 +25,8 @@ namespace WebEng.ReplacementParts
                 IServiceProvider services = scope.ServiceProvider;
                 try
                 {
-
-                    DbInitializer.Initialize().Wait();
-
-
+                    ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
+                    DbInitializer.Initialize(context).Wait();
                 }
                 catch (Exception ex)
                 {
@@ -35,6 +34,8 @@ namespace WebEng.ReplacementParts
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
+
+            host.Run();
 
         }
 

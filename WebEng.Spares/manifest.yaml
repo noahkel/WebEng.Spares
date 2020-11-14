@@ -1,0 +1,4 @@
+ applications:
+ - name: WebEng.Spares
+   random-route: true
+   memory: 512M

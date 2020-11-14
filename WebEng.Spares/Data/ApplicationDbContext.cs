@@ -21,14 +21,13 @@ namespace WebEng.ReplacementParts.Data
             {
                 eb.HasKey(e => e.Key);
                 eb.Property(e => e.Name);
-                eb.Property(e => e.Description).HasColumnName("CarDescription");
+                eb.Property(e => e.Description);
                 eb.Property(e => e.PictureUrl);
             });
 
             modelBuilder.Entity<Manufacturer>(eb =>
             {
                 eb.HasKey(e => e.Key);
-                eb.Property(e => e.Name);
                 eb.Property(e => e.Description);
                 eb.Property(e => e.PictureUrl);
             });
@@ -40,8 +39,8 @@ namespace WebEng.ReplacementParts.Data
                 eb.Property(eb => eb.Description);
                 eb.Property(eb => eb.Weight);
                 eb.Property(eb => eb.PictureUrl);
-                eb.Property(eb => eb.Finished).HasColumnType("Date");
-                eb.Property(eb => eb.Started).HasColumnType("Date");
+                eb.Property(eb => eb.Finished);
+                eb.Property(eb => eb.Started);
                 eb.HasOne(eb => eb.Brand).WithMany().HasForeignKey(d => d.BrandFK);
             });
 
