@@ -18,6 +18,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebEng.ReplacementParts.Data;
+using WebEng.Spares.Data;
 
 namespace WebEng.ReplacementParts
 {
@@ -35,7 +36,7 @@ namespace WebEng.ReplacementParts
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("postgres")));
+                options.UseNpgsql(ConnectionBuilder.GetConnectionString()));
             services.AddRazorPages();
         }
 

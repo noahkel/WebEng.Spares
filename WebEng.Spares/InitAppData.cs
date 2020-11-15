@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebEng.ReplacementParts.Data;
 using WebEng.ReplacementParts.Models;
+using WebEng.Spares.Data;
 
 namespace WebEng.ReplacementParts
 {
@@ -18,7 +19,7 @@ namespace WebEng.ReplacementParts
         {
             IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseNpgsql(config.GetConnectionString("postgres"));
+            optionsBuilder.UseNpgsql(ConnectionBuilder.GetConnectionString());
             _context = new ApplicationDbContext(optionsBuilder.Options);
             _context.Database.EnsureCreated();
         }

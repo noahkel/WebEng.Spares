@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="IBM.Data.DB2.Core" Version="3.1.0.300" />
     <PackageReference Include="IBM.Data.DB2.Core-lnx" Version="3.1.0.300" />
     <PackageReference Include="IBM.EntityFrameworkCore" Version="3.1.0.300" />
@@ -24,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="cert.cert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\BRANDS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
